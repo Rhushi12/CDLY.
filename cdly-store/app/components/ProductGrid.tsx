@@ -1,12 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProductCard from "./ProductCard";
 import SplitText from "./SplitText";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const products = [
     {
@@ -26,7 +21,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798",
         imageAlt: "Close up of structured black blazer texture and lapel details",
         isNew: false,
-        isMiddle: true,
+        className: "md:mt-12",
     },
     {
         name: "Pleated Trousers",
@@ -45,6 +40,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuBdnUywGjGsg-O66lCbAkqCXmckmoa5gI946IoJe2voCjsh9JskdR3JJZPDf3vq8EKdMZPFZXFmsKA2jSeRPec7GTvqXYqJzTnJ_OK5kK71nFuaGcgDVlBW52oC4uepu_27Aiwk0Z12C9IaeHCyX7_7ajjIU8rAsEdKf2xf0tyO8U64E385S4ZmzHnPzp5a_tvfhNan6gF2UzuVbA2MJB0vYMdjxpyaanCv6PRNfz-Hs0LJ5Bv0ErAAn4t_H12dm1zMeC2-bZsjjFw",
         imageAlt: "Black leather chelsea boots on concrete floor",
         isNew: false,
+        className: "md:mt-[-3rem] lg:mt-0",
     },
     {
         name: "Silk Print Scarf",
@@ -54,7 +50,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuDqLwchKssKhsQ-6GjF98YT7cVOKSHqYgOcPT4A8ygS8HWD552MWX8PbkENViCTnWP-QAazr2Xg-aJ_dySLkghG4tSH_wCcF5HpuprnRJgthUgkBJOq8AFew6B4M4K_T99uLSWG8bukAbaySwG1c9fVujMZzcj9DhXskBlSnbW3UDN8vZiEL5HoqfI6SWUhsFuMGn9G7s3BcAh7fn5nlT-YeB7kMu8dOTPoaulsRcDa9HoV1Z5VJwW-J5fFkRcTJmFeKc3C5aDfPLM",
         imageAlt: "Silk scarf with abstract black and white print draped on mannequin",
         isNew: false,
-        isMiddle: true,
+        className: "md:mt-12",
     },
     {
         name: "Oversized Shirt",
@@ -68,47 +64,6 @@ const products = [
 ];
 
 export default function ProductGrid() {
-    const gridRef = useRef<HTMLDivElement>(null);
-    const middleCardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-    useEffect(() => {
-        if (!gridRef.current) return;
-
-        const middleCards = middleCardsRef.current.filter(Boolean);
-
-        // Check if we're on desktop (3 columns)
-        const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-
-        if (!isDesktop || middleCards.length === 0) return;
-
-        // Parallax animation for middle cards
-        // Starts below (+80), passes through 0 (aligned), ends above (-80)
-        middleCards.forEach((card) => {
-            if (!card) return;
-
-            gsap.fromTo(
-                card,
-                {
-                    y: 80, // Start 80px below
-                },
-                {
-                    y: -80, // End 80px above
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top bottom", // Start when card top reaches bottom of viewport
-                        end: "bottom top", // End when card bottom reaches top of viewport
-                        scrub: 1, // Smooth scroll-linked animation
-                    },
-                }
-            );
-        });
-
-        return () => {
-            ScrollTrigger.getAll().forEach((st) => st.kill());
-        };
-    }, []);
-
     return (
         <section className="w-full max-w-[1440px] mx-auto px-6 py-20 reveal-on-scroll bg-white">
             <div className="flex justify-between items-end mb-12">
@@ -128,28 +83,18 @@ export default function ProductGrid() {
                     View All
                 </a>
             </div>
-            <div
-                ref={gridRef}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12">
                 {products.map((product, index) => (
-                    <div
+                    <ProductCard
                         key={index}
-                        ref={(el) => {
-                            if (product.isMiddle) {
-                                middleCardsRef.current[index] = el;
-                            }
-                        }}
-                    >
-                        <ProductCard
-                            name={product.name}
-                            category={product.category}
-                            price={product.price}
-                            imageUrl={product.imageUrl}
-                            imageAlt={product.imageAlt}
-                            isNew={product.isNew}
-                        />
-                    </div>
+                        name={product.name}
+                        category={product.category}
+                        price={product.price}
+                        imageUrl={product.imageUrl}
+                        imageAlt={product.imageAlt}
+                        isNew={product.isNew}
+                        className={product.className}
+                    />
                 ))}
             </div>
         </section>
