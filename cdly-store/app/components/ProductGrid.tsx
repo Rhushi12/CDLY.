@@ -1,7 +1,12 @@
 "use client";
 
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProductCard from "./ProductCard";
 import SplitText from "./SplitText";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const products = [
     {
@@ -21,7 +26,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798",
         imageAlt: "Close up of structured black blazer texture and lapel details",
         isNew: false,
-        className: "md:mt-12",
+        isMiddle: true,
     },
     {
         name: "Pleated Trousers",
@@ -40,7 +45,6 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuBdnUywGjGsg-O66lCbAkqCXmckmoa5gI946IoJe2voCjsh9JskdR3JJZPDf3vq8EKdMZPFZXFmsKA2jSeRPec7GTvqXYqJzTnJ_OK5kK71nFuaGcgDVlBW52oC4uepu_27Aiwk0Z12C9IaeHCyX7_7ajjIU8rAsEdKf2xf0tyO8U64E385S4ZmzHnPzp5a_tvfhNan6gF2UzuVbA2MJB0vYMdjxpyaanCv6PRNfz-Hs0LJ5Bv0ErAAn4t_H12dm1zMeC2-bZsjjFw",
         imageAlt: "Black leather chelsea boots on concrete floor",
         isNew: false,
-        className: "md:mt-[-3rem] lg:mt-0",
     },
     {
         name: "Silk Print Scarf",
@@ -50,7 +54,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuDqLwchKssKhsQ-6GjF98YT7cVOKSHqYgOcPT4A8ygS8HWD552MWX8PbkENViCTnWP-QAazr2Xg-aJ_dySLkghG4tSH_wCcF5HpuprnRJgthUgkBJOq8AFew6B4M4K_T99uLSWG8bukAbaySwG1c9fVujMZzcj9DhXskBlSnbW3UDN8vZiEL5HoqfI6SWUhsFuMGn9G7s3BcAh7fn5nlT-YeB7kMu8dOTPoaulsRcDa9HoV1Z5VJwW-J5fFkRcTJmFeKc3C5aDfPLM",
         imageAlt: "Silk scarf with abstract black and white print draped on mannequin",
         isNew: false,
-        className: "md:mt-12",
+        isMiddle: true,
     },
     {
         name: "Oversized Shirt",
@@ -64,8 +68,77 @@ const products = [
 ];
 
 export default function ProductGrid() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const gridRef = useRef<HTMLDivElement>(null);
+    const middleCardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+    useEffect(() => {
+        if (!gridRef.current) return;
+
+        const middleCards = middleCardsRef.current.filter(Boolean);
+
+        // Check if we're on desktop (3 columns)
+        const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
+        if (!isDesktop || middleCards.length === 0) return;
+
+        // Create timeline for each middle card
+        middleCards.forEach((card) => {
+            if (!card) return;
+
+            // Initial state: middle card is offset down
+            gsap.set(card, {
+                y: 60,
+                zIndex: 1,
+            });
+
+            // Create scroll-triggered animation
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    end: "top 20%",
+                    scrub: 1,
+                },
+            });
+
+            // Phase 1: Align with others (y goes to 0)
+            tl.to(card, {
+                y: 0,
+                duration: 0.5,
+                ease: "none",
+            });
+
+            // Phase 2: Scale up and overlap
+            tl.to(card, {
+                scale: 1.08,
+                zIndex: 10,
+                duration: 0.5,
+                ease: "none",
+            });
+
+            // Add shadow during scale
+            tl.to(
+                card,
+                {
+                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.35)",
+                    duration: 0.5,
+                    ease: "none",
+                },
+                "<"
+            );
+        });
+
+        return () => {
+            ScrollTrigger.getAll().forEach((st) => st.kill());
+        };
+    }, []);
+
     return (
-        <section className="w-full max-w-[1440px] mx-auto px-6 py-20 reveal-on-scroll bg-white">
+        <section
+            ref={sectionRef}
+            className="w-full max-w-[1440px] mx-auto px-6 py-20 reveal-on-scroll bg-white"
+        >
             <div className="flex justify-between items-end mb-12">
                 <SplitText
                     text="Latest Drops"
@@ -83,18 +156,32 @@ export default function ProductGrid() {
                     View All
                 </a>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12">
+            <div
+                ref={gridRef}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12"
+            >
                 {products.map((product, index) => (
-                    <ProductCard
+                    <div
                         key={index}
-                        name={product.name}
-                        category={product.category}
-                        price={product.price}
-                        imageUrl={product.imageUrl}
-                        imageAlt={product.imageAlt}
-                        isNew={product.isNew}
-                        className={product.className}
-                    />
+                        ref={(el) => {
+                            if (product.isMiddle) {
+                                middleCardsRef.current[index] = el;
+                            }
+                        }}
+                        className={`${product.isMiddle ? "lg:relative" : ""}`}
+                        style={{
+                            transformOrigin: "center center",
+                        }}
+                    >
+                        <ProductCard
+                            name={product.name}
+                            category={product.category}
+                            price={product.price}
+                            imageUrl={product.imageUrl}
+                            imageAlt={product.imageAlt}
+                            isNew={product.isNew}
+                        />
+                    </div>
                 ))}
             </div>
         </section>
