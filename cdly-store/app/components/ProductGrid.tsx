@@ -68,7 +68,6 @@ const products = [
 ];
 
 export default function ProductGrid() {
-    const sectionRef = useRef<HTMLElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
     const middleCardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -82,50 +81,26 @@ export default function ProductGrid() {
 
         if (!isDesktop || middleCards.length === 0) return;
 
-        // Create timeline for each middle card
+        // Parallax animation for middle cards
+        // Starts below (+80), passes through 0 (aligned), ends above (-80)
         middleCards.forEach((card) => {
             if (!card) return;
 
-            // Initial state: middle card is offset down
-            gsap.set(card, {
-                y: 60,
-                zIndex: 1,
-            });
-
-            // Create scroll-triggered animation
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 80%",
-                    end: "top 20%",
-                    scrub: 1,
-                },
-            });
-
-            // Phase 1: Align with others (y goes to 0)
-            tl.to(card, {
-                y: 0,
-                duration: 0.5,
-                ease: "none",
-            });
-
-            // Phase 2: Scale up and overlap
-            tl.to(card, {
-                scale: 1.08,
-                zIndex: 10,
-                duration: 0.5,
-                ease: "none",
-            });
-
-            // Add shadow during scale
-            tl.to(
+            gsap.fromTo(
                 card,
                 {
-                    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.35)",
-                    duration: 0.5,
-                    ease: "none",
+                    y: 80, // Start 80px below
                 },
-                "<"
+                {
+                    y: -80, // End 80px above
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom", // Start when card top reaches bottom of viewport
+                        end: "bottom top", // End when card bottom reaches top of viewport
+                        scrub: 1, // Smooth scroll-linked animation
+                    },
+                }
             );
         });
 
@@ -135,10 +110,7 @@ export default function ProductGrid() {
     }, []);
 
     return (
-        <section
-            ref={sectionRef}
-            className="w-full max-w-[1440px] mx-auto px-6 py-20 reveal-on-scroll bg-white"
-        >
+        <section className="w-full max-w-[1440px] mx-auto px-6 py-20 reveal-on-scroll bg-white">
             <div className="flex justify-between items-end mb-12">
                 <SplitText
                     text="Latest Drops"
@@ -167,10 +139,6 @@ export default function ProductGrid() {
                             if (product.isMiddle) {
                                 middleCardsRef.current[index] = el;
                             }
-                        }}
-                        className={`${product.isMiddle ? "lg:relative" : ""}`}
-                        style={{
-                            transformOrigin: "center center",
                         }}
                     >
                         <ProductCard
