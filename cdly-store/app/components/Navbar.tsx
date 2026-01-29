@@ -15,6 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const hasInteracted = useRef(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
     const linksRef = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -34,8 +35,11 @@ export default function Navbar() {
         };
     }, [isOpen]);
 
-    // GSAP animations
+    // GSAP animations - only run after user interaction
     useEffect(() => {
+        // Skip animation on initial mount
+        if (!hasInteracted.current) return;
+
         if (!menuRef.current || !overlayRef.current) return;
 
         const menu = menuRef.current;
@@ -175,7 +179,10 @@ export default function Navbar() {
 
                         {/* Hamburger Button */}
                         <button
-                            onClick={() => setIsOpen(!isOpen)}
+                            onClick={() => {
+                                hasInteracted.current = true;
+                                setIsOpen(!isOpen);
+                            }}
                             className="md:hidden p-2 relative w-8 h-8 flex flex-col items-center justify-center gap-[5px] z-[60]"
                             aria-label="Toggle menu"
                         >
