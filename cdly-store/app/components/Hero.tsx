@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
     return (
         <section className="sticky top-0 z-0 w-full h-screen min-h-[600px] flex items-center border-b border-gray-200 overflow-hidden">
@@ -26,17 +28,18 @@ export default function Hero() {
                         Sharp lines, premium wools, and an uncompromising dedication to
                         form.
                     </p>
-                    <a
+                    <Link
                         className="inline-flex items-center justify-center h-12 px-8 bg-[--primary] hover:bg-[--primary]/90 text-white text-sm font-bold uppercase tracking-widest transition-all w-fit group shadow-lg rounded-none"
-                        href="#"
+                        href="/lookbook"
                     >
                         Explore Lookbook
                         <span className="material-symbols-outlined ml-2 text-lg group-hover:translate-x-1 transition-transform">
                             arrow_forward
                         </span>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>
     );
 }
+

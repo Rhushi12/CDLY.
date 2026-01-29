@@ -2,7 +2,7 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Refined Best Sellers Experience</title>
+<title>Editorial Seasonal Lookbook</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -13,10 +13,10 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#144bb8",
+                        "primary": "#004aad", 
                         "klein-blue": "#004aad",
                         "background-light": "#ffffff",
-                        "background-dark": "#111621",
+                        "background-dark": "#ffffff", 
                     },
                     fontFamily: {
                         "display": ["Space Grotesk", "sans-serif"],
@@ -25,14 +25,13 @@
                     },
                     borderRadius: {
                         "DEFAULT": "0px",
-                        "sm": "0px",
-                        "md": "0px",
-                        "lg": "0px",
-                        "xl": "0px",
-                        "2xl": "0px",
-                        "3xl": "0px",
-                        "full": "0px" 
+                        "full": "9999px" 
                     },
+                    spacing: {
+                        '18': '4.5rem',
+                        '30': '7.5rem', 
+                        '38': '9.5rem', 
+                    }
                 },
             },
         }
@@ -43,10 +42,10 @@
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #f0f0f0; 
+            background: #ffffff; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #111318; 
+            background: #004aad; 
         }
         html {
             scroll-behavior: smooth;
@@ -58,389 +57,372 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px black;
+        }
+        .text-outline-white {
+            color: rgba(255, 255, 255, 0.1);-webkit-text-stroke: 1px white;
+        }
+        @keyframes maskReveal {
+            0% { transform: translateY(110%); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes fadeSlideUp {
+            0% { 
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes scaleIn {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
         @supports (animation-timeline: view()) {
-            @keyframes revealUp {
-                0% {
-                    opacity: 0;
-                    transform: translateY(60px);
-                    filter: blur(5px);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                    filter: blur(0);
-                }
-            }
-            .reveal-on-scroll {
-                animation: revealUp 1s ease-out both;
+            .reveal-text {
+                animation: maskReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
                 animation-timeline: view();
-                animation-range: entry 5% cover 25%;
+                animation-range: entry 10% cover 30%;
             }
-        }@keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            .reveal-card {
+                animation: fadeSlideUp 0.8s ease-out both;
+                animation-timeline: view();
+                animation-range: entry 10% cover 30%;}.stagger-1 { animation-range: entry 5% cover 25%; }
+            .stagger-2 { animation-range: entry 15% cover 35%; }
+            .stagger-3 { animation-range: entry 25% cover 45%; }
+            .stagger-4 { animation-range: entry 35% cover 55%; }
+            .stagger-5 { animation-range: entry 45% cover 65%; }
+            .stagger-6 { animation-range: entry 55% cover 75%; }
+            .animate-scale-section {
+                animation: scaleIn 1s ease-out both;
+                animation-timeline: view();
+                animation-range: entry 0% cover 40%;
+                transform-origin: center;
+            }
+        }.parallax-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+        .hero-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+        }.content-pusher {
+            height: 100vh;
+            width: 100%;
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display overflow-x-hidden antialiased selection:bg-klein-blue selection:text-white flex flex-col min-h-screen">
-<nav class="sticky top-0 z-50 w-full bg-white dark:bg-[#111621] border-b border-black dark:border-white transition-colors duration-300">
-<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<body class="bg-white text-black font-display overflow-x-hidden antialiased selection:bg-klein-blue selection:text-white">
+<nav class="fixed top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-black transition-colors duration-300">
+<div class="max-w-[1920px] mx-auto px-6 h-20 flex items-center justify-between">
 <div class="flex items-center gap-2">
-<a class="text-2xl font-black tracking-tighter uppercase hover:text-klein-blue transition-colors" href="#">LUXE</a>
+<a class="text-3xl font-black tracking-tighter uppercase hover:text-klein-blue transition-colors" href="#">LUXE</a>
 </div>
 <div class="hidden md:flex items-center gap-12 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-<a class="text-xs font-bold uppercase tracking-widest text-klein-blue underline underline-offset-4 decoration-1" href="#">Shop</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-klein-blue transition-all" href="#">Editorial</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-klein-blue transition-all" href="#">About</a>
+<a class="text-xs font-bold uppercase tracking-[0.2em] hover:text-klein-blue underline-offset-4 decoration-1 transition-all" href="#">Collection</a>
+<a class="text-xs font-bold uppercase tracking-[0.2em] text-klein-blue underline-offset-4 decoration-1 transition-all" href="#">Lookbook</a>
+<a class="text-xs font-bold uppercase tracking-[0.2em] hover:text-klein-blue underline-offset-4 decoration-1 transition-all" href="#">Archives</a>
 </div>
 <div class="flex items-center gap-6">
-<button class="hidden sm:flex text-xs font-bold uppercase tracking-widest hover:text-klein-blue transition-colors">
-                Cart (2)
+<button class="hidden sm:flex text-xs font-bold uppercase tracking-[0.2em] hover:text-klein-blue transition-colors">
+                Cart (0)
             </button>
-<button class="md:hidden p-1 text-[#111318] dark:text-white">
+<button class="md:hidden p-1 text-black">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
 </div>
 </nav>
-<header class="bg-white dark:bg-background-dark border-b border-black dark:border-white pt-24 pb-8 px-6 w-full">
-<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-start justify-between gap-6">
-<h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.85]">
-            Best<br/>Sellers
-        </h1>
-<div class="md:mt-4">
-<span class="inline-block bg-klein-blue text-white text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5">
-                High Demand
-            </span>
-</div>
-</div>
-</header>
-<div class="max-w-[1440px] mx-auto w-full px-6 flex-grow">
-<div class="flex flex-col lg:flex-row">
-<aside class="w-full lg:w-1/5 lg:sticky lg:top-16 lg:h-[calc(100vh-64px)] pt-[100px] pb-12 lg:pb-0 pr-6">
-<div class="flex flex-col gap-8">
-<div>
-<h3 class="text-xs font-mono text-gray-400 uppercase mb-6">Category</h3>
-<nav class="flex flex-col gap-3 text-xs font-bold uppercase tracking-widest">
-<a class="text-klein-blue flex items-center gap-2" href="#">
-<span class="w-1 h-1 bg-klein-blue rounded-full"></span> All Items
-                        </a>
-<a class="hover:text-klein-blue transition-colors group flex items-center gap-2" href="#">
-<span class="w-1 h-1 bg-transparent group-hover:bg-klein-blue rounded-full transition-colors"></span> Outerwear
-                        </a>
-<a class="hover:text-klein-blue transition-colors group flex items-center gap-2" href="#">
-<span class="w-1 h-1 bg-transparent group-hover:bg-klein-blue rounded-full transition-colors"></span> Tailoring
-                        </a>
-<a class="hover:text-klein-blue transition-colors group flex items-center gap-2" href="#">
-<span class="w-1 h-1 bg-transparent group-hover:bg-klein-blue rounded-full transition-colors"></span> Knitwear
-                        </a>
-<a class="hover:text-klein-blue transition-colors group flex items-center gap-2" href="#">
-<span class="w-1 h-1 bg-transparent group-hover:bg-klein-blue rounded-full transition-colors"></span> Footwear
-                        </a>
-<a class="hover:text-klein-blue transition-colors group flex items-center gap-2" href="#">
-<span class="w-1 h-1 bg-transparent group-hover:bg-klein-blue rounded-full transition-colors"></span> Accessories
-                        </a>
-</nav>
-</div>
-<div class="hidden lg:block pt-12 border-t border-gray-100 dark:border-gray-800">
-<h3 class="text-xs font-mono text-gray-400 uppercase mb-6">Filter</h3>
-<div class="flex flex-col gap-3 text-xs font-bold uppercase tracking-widest">
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="w-3 h-3 border-black rounded-none text-klein-blue focus:ring-0 focus:ring-offset-0 cursor-pointer" type="checkbox"/>
-<span class="group-hover:text-klein-blue transition-colors">In Stock</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="w-3 h-3 border-black rounded-none text-klein-blue focus:ring-0 focus:ring-offset-0 cursor-pointer" type="checkbox"/>
-<span class="group-hover:text-klein-blue transition-colors">Pre-Order</span>
-</label>
-</div>
-</div>
-</div>
-</aside>
-<main class="w-full lg:w-4/5 pt-[100px] pb-32">
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16">
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 01</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Wool Trench</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Heavyweight</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$850</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Derby Shoe</span>
-</div>
-</div>
-</div>
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 02</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Archive Parka</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Technical</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$1,200</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Cargo Pant</span>
-</div>
-</div>
-</div>
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 03</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Pleated Trouser</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Relaxed Fit</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$340</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Oversized Shirt</span>
-</div>
-</div>
-</div>
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBdnUywGjGsg-O66lCbAkqCXmckmoa5gI946IoJe2voCjsh9JskdR3JJZPDf3vq8EKdMZPFZXFmsKA2jSeRPec7GTvqXYqJzTnJ_OK5kK71nFuaGcgDVlBW52oC4uepu_27Aiwk0Z12C9IaeHCyX7_7ajjIU8rAsEdKf2xf0tyO8U64E385S4ZmzHnPzp5a_tvfhNan6gF2UzuVbA2MJB0vYMdjxpyaanCv6PRNfz-Hs0LJ5Bv0ErAAn4t_H12dm1zMeC2-bZsjjFw');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 04</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Derby Shoe</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Calf Leather</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$580</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Wool Socks</span>
-</div>
-</div>
-</div>
-</div>
-<div class="py-[150px] reveal-on-scroll">
-<div class="relative w-full h-[600px] overflow-hidden border border-black dark:border-white group">
-<img alt="Editorial Campaign" class="absolute inset-0 w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo"/>
-<div class="absolute inset-0 bg-black/20"></div>
-<div class="absolute bottom-0 left-0 p-8 md:p-12 w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-<div>
-<span class="bg-klein-blue text-white px-3 py-1 text-[10px] font-bold tracking-[0.2em] uppercase mb-4 inline-block">In Focus</span>
-<h2 class="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-2">The Winter<br/>Edit</h2>
-<p class="text-gray-200 font-mono text-sm max-w-md uppercase">Showcasing the structural integrity of our new heavyweight wool compositions.</p>
-</div>
-<button class="bg-white text-black px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] hover:bg-klein-blue hover:text-white transition-colors border-none">
-                            View The Edit
-                        </button>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16">
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 05</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Cashmere Knit</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Charcoal</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$420</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Silk Scarf</span>
-</div>
-</div>
-</div>
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 06</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Wide Trouser</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Virgin Wool</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$450</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Fitted Tank</span>
-</div>
-</div>
-</div>
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo5LMDa2pGV3QFyOto6ex_9Sz1-WNVmRtBxSGVkb9O33tUZ-yyTqBVBzEvXRy_Nvxqi493Q-Dtjoq5TkrARySl4JM3mdmUSY4sScIOsZ8m74nh_h4yIsdjc9R1ELsn7hlzYXgzhNPHYXoJz5ttUtqQHMABsOA3VpC-yrVuVTrz6ApOLhZFzhKxTIheIgN48zMiSAVZ40W6uJlPzsOc0uIAwxrXRrRcpqX_SH2pOkhTBHVBtf1zZ9f3-Cfv-jIy1qvMEjF6pLN2gmw');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 07</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Poplin Shirt</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Oversized</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$290</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Raw Denim</span>
-</div>
-</div>
-</div>
-<div class="group relative cursor-pointer reveal-on-scroll">
-<div class="aspect-[3/4] w-full border border-black dark:border-white overflow-hidden bg-gray-50 dark:bg-white/5 relative">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM');"></div>
-<div class="absolute top-0 right-0 border-l border-b border-black dark:border-white bg-white dark:bg-black px-2 py-1 z-10">
-<span class="text-[10px] font-mono font-bold tracking-tight text-black dark:text-white">RANK 08</span>
-</div>
-<div class="absolute inset-0 bg-klein-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-<span class="text-white text-lg font-bold tracking-[0.2em] font-mono">QUICK ADD</span>
-</div>
-</div>
-<div class="mt-3 flex justify-between items-start">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest group-hover:text-klein-blue transition-colors">Summer Shirt</h3>
-<p class="text-[10px] text-gray-500 font-mono uppercase mt-0.5">Linen Blend</p>
-</div>
-<div class="text-right">
-<span class="text-xs font-mono font-medium block">$220</span>
-<span class="text-[9px] text-gray-400 font-mono uppercase mt-1 block">Pair with Shorts</span>
-</div>
-</div>
-</div>
-</div>
-<div class="mt-32 mb-12">
-<div class="flex items-center justify-between mb-8 border-b border-black dark:border-white pb-4">
-<h2 class="text-2xl font-black uppercase tracking-tight">Trending Reels</h2>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-klein-blue transition-colors flex items-center gap-1" href="#">
-                        View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+<div class="hero-fixed">
+<div class="relative w-full h-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbNv48_DmO0L8RmBkoKyamtrXsaXU2gA_9MgQT9x6r6Z30DnIdqXiE0M8ZdJNzEoiBfg7PWD8WFTEanNFQ0yho7mC0kTtd1G7q-BYDSHOy_yHNbvyQcbPX8moSj4oB2xAxoafvCzgDHBU-Regq81cTRSn3KbJQgtyjx0iWnM1rYYuSoBBjTVmgDUH8mBwl0yCT13vW0SD4vOnh98BfCAreSNLORCIdyOz_VX-AEUxqRpl4cBZqM4e0YPKx4rZrMZ7C2uuReXK91qU');"></div>
+<div class="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full px-6 flex flex-col items-center justify-center h-full text-center mix-blend-normal">
+<span class="text-white text-sm font-mono font-bold tracking-[0.3em] mb-6 uppercase">Volume 04 — New York</span>
+<div class="overflow-hidden">
+<h1 class="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.85] tracking-tighter text-outline-white drop-shadow-2xl animate-title-reveal">
+                    FALL / WINTER<br/>LOOKBOOK
+                </h1>
+</div>
+<div class="mt-12">
+<a class="inline-flex items-center gap-2 text-white font-bold uppercase tracking-[0.2em] text-sm border-b border-white pb-1 hover:text-klein-blue hover:border-klein-blue transition-colors" href="#lookbook">
+                    View Collection <span class="material-symbols-outlined text-lg">arrow_downward</span>
 </a>
 </div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<div class="aspect-[9/16] bg-gray-100 relative group cursor-pointer overflow-hidden border border-black dark:border-white">
-<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo"/>
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-3 right-3 text-white">
-<span class="material-symbols-outlined drop-shadow-md">play_circle</span>
-</div>
-<div class="absolute bottom-3 left-3">
-<p class="text-white text-[10px] font-bold uppercase tracking-widest drop-shadow-md">BTS: Campaign</p>
-</div>
-</div>
-<div class="aspect-[9/16] bg-gray-100 relative group cursor-pointer overflow-hidden border border-black dark:border-white">
-<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM"/>
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-3 right-3 text-white">
-<span class="material-symbols-outlined drop-shadow-md">play_circle</span>
-</div>
-<div class="absolute bottom-3 left-3">
-<p class="text-white text-[10px] font-bold uppercase tracking-widest drop-shadow-md">Styling: Pleats</p>
-</div>
-</div>
-<div class="aspect-[9/16] bg-gray-100 relative group cursor-pointer overflow-hidden border border-black dark:border-white">
-<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdnUywGjGsg-O66lCbAkqCXmckmoa5gI946IoJe2voCjsh9JskdR3JJZPDf3vq8EKdMZPFZXFmsKA2jSeRPec7GTvqXYqJzTnJ_OK5kK71nFuaGcgDVlBW52oC4uepu_27Aiwk0Z12C9IaeHCyX7_7ajjIU8rAsEdKf2xf0tyO8U64E385S4ZmzHnPzp5a_tvfhNan6gF2UzuVbA2MJB0vYMdjxpyaanCv6PRNfz-Hs0LJ5Bv0ErAAn4t_H12dm1zMeC2-bZsjjFw"/>
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-3 right-3 text-white">
-<span class="material-symbols-outlined drop-shadow-md">play_circle</span>
-</div>
-<div class="absolute bottom-3 left-3">
-<p class="text-white text-[10px] font-bold uppercase tracking-widest drop-shadow-md">Material Focus</p>
-</div>
-</div>
-<div class="aspect-[9/16] bg-gray-100 relative group cursor-pointer overflow-hidden border border-black dark:border-white">
-<img class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo5LMDa2pGV3QFyOto6ex_9Sz1-WNVmRtBxSGVkb9O33tUZ-yyTqBVBzEvXRy_Nvxqi493Q-Dtjoq5TkrARySl4JM3mdmUSY4sScIOsZ8m74nh_h4yIsdjc9R1ELsn7hlzYXgzhNPHYXoJz5ttUtqQHMABsOA3VpC-yrVuVTrz6ApOLhZFzhKxTIheIgN48zMiSAVZ40W6uJlPzsOc0uIAwxrXRrRcpqX_SH2pOkhTBHVBtf1zZ9f3-Cfv-jIy1qvMEjF6pLN2gmw"/>
-<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute top-3 right-3 text-white">
-<span class="material-symbols-outlined drop-shadow-md">play_circle</span>
-</div>
-<div class="absolute bottom-3 left-3">
-<p class="text-white text-[10px] font-bold uppercase tracking-widest drop-shadow-md">Runway Walk</p>
 </div>
 </div>
 </div>
-</div>
-<div class="mt-24 flex justify-center w-full">
-<button class="border-2 border-black dark:border-white bg-transparent hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors px-16 py-5 text-sm font-bold uppercase tracking-[0.25em]">
-                    Load More
-                </button>
-</div>
-</main>
-</div>
-</div>
-<footer class="w-full bg-white dark:bg-[#111621] border-t border-black dark:border-white reveal-on-scroll mt-auto">
-<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row">
-<div class="w-full md:w-1/2 p-6 md:p-16 border-b md:border-b-0 md:border-r border-black dark:border-white flex flex-col justify-between min-h-[400px]">
+<div class="content-pusher"></div>
+<div class="relative z-10 bg-white shadow-[0_-10px_40px_rgba(0,0,0,0.1)] parallax-wrapper">
+<section class="w-full max-w-[1920px] mx-auto px-6 py-38 bg-white" id="lookbook">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 border-b border-black pb-8">
 <div>
-<h3 class="text-xl font-bold uppercase tracking-tight mb-2">Newsletter</h3>
-<p class="text-gray-500 dark:text-gray-400 mb-8 max-w-sm text-sm font-mono uppercase">Join for early access to collections.</p>
+<span class="text-klein-blue font-mono text-xs uppercase tracking-widest mb-2 block">The Seasonal Edit</span>
+<div class="overflow-hidden">
+<h2 class="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none reveal-text">The Grid</h2>
 </div>
-<form class="flex flex-col gap-0 border border-black dark:border-white">
-<label class="sr-only" for="email">Email Address</label>
-<input class="w-full h-14 px-6 bg-transparent text-[#111318] dark:text-white placeholder:text-gray-400 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-800 transition-all font-mono text-sm uppercase rounded-none border-b border-black dark:border-white" id="email" placeholder="ENTER EMAIL" type="email"/>
-<button class="h-14 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-[0.2em] hover:bg-klein-blue dark:hover:bg-klein-blue dark:hover:text-white transition-colors rounded-none" type="button">
-                    Subscribe
-                </button>
+</div>
+<p class="text-sm font-mono uppercase text-right max-w-xs mt-8 md:mt-0">
+                A study in form, texture, and the absence of color. 
+                <br/>Scroll to explore styles 01-08.
+            </p>
+</div>
+<div class="columns-1 md:columns-2 lg:columns-3 gap-12 space-y-12">
+<div class="break-inside-avoid group cursor-pointer reveal-card stagger-1">
+<div class="relative w-full border border-black overflow-hidden">
+<img alt="Look 01" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo"/>
+<div class="absolute bottom-4 left-4 bg-white border border-black px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="text-xs font-bold uppercase tracking-widest">Shop Look</span>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<span class="text-klein-blue text-sm font-bold font-mono tracking-widest">LOOK 01</span>
+<div class="text-right">
+<h3 class="text-lg font-bold uppercase leading-none">Wool Trench</h3>
+<span class="text-xs font-mono text-gray-500">$1,200</span>
+</div>
+</div>
+</div>
+<div class="break-inside-avoid group cursor-pointer reveal-card stagger-2">
+<div class="relative w-full border border-black overflow-hidden">
+<img alt="Look 02" class="w-full aspect-[4/3] object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM"/>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<span class="text-klein-blue text-sm font-bold font-mono tracking-widest">LOOK 02</span>
+<div class="text-right">
+<h3 class="text-lg font-bold uppercase leading-none">Pleated Trouser</h3>
+<span class="text-xs font-mono text-gray-500">$450</span>
+</div>
+</div>
+</div>
+<div class="break-inside-avoid group cursor-pointer reveal-card stagger-3">
+<div class="relative w-full border border-black overflow-hidden">
+<img alt="Look 03" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798"/>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<span class="text-klein-blue text-sm font-bold font-mono tracking-widest">LOOK 03</span>
+<div class="text-right">
+<h3 class="text-lg font-bold uppercase leading-none">Structured Blazer</h3>
+<span class="text-xs font-mono text-gray-500">$890</span>
+</div>
+</div>
+</div>
+<div class="break-inside-avoid group cursor-pointer reveal-card stagger-1">
+<div class="relative w-full border border-black overflow-hidden">
+<img alt="Look 04" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo5LMDa2pGV3QFyOto6ex_9Sz1-WNVmRtBxSGVkb9O33tUZ-yyTqBVBzEvXRy_Nvxqi493Q-Dtjoq5TkrARySl4JM3mdmUSY4sScIOsZ8m74nh_h4yIsdjc9R1ELsn7hlzYXgzhNPHYXoJz5ttUtqQHMABsOA3VpC-yrVuVTrz6ApOLhZFzhKxTIheIgN48zMiSAVZ40W6uJlPzsOc0uIAwxrXRrRcpqX_SH2pOkhTBHVBtf1zZ9f3-Cfv-jIy1qvMEjF6pLN2gmw"/>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<span class="text-klein-blue text-sm font-bold font-mono tracking-widest">LOOK 04</span>
+<div class="text-right">
+<h3 class="text-lg font-bold uppercase leading-none">Poplin Shirt</h3>
+<span class="text-xs font-mono text-gray-500">$320</span>
+</div>
+</div>
+</div>
+<div class="break-inside-avoid group cursor-pointer reveal-card stagger-2">
+<div class="relative w-full aspect-[3/4] border border-black overflow-hidden">
+<img alt="Look 05" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqLwchKssKhsQ-6GjF98YT7cVOKSHqYgOcPT4A8ygS8HWD552MWX8PbkENViCTnWP-QAazr2Xg-aJ_dySLkghG4tSH_wCcF5HpuprnRJgthUgkBJOq8AFew6B4M4K_T99uLSWG8bukAbaySwG1c9fVujMZzcj9DhXskBlSnbW3UDN8vZiEL5HoqfI6SWUhsFuMGn9G7s3BcAh7fn5nlT-YeB7kMu8dOTPoaulsRcDa9HoV1Z5VJwW-J5fFkRcTJmFeKc3C5aDfPLM"/>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<span class="text-klein-blue text-sm font-bold font-mono tracking-widest">LOOK 05</span>
+<div class="text-right">
+<h3 class="text-lg font-bold uppercase leading-none">Silk Scarf</h3>
+<span class="text-xs font-mono text-gray-500">$180</span>
+</div>
+</div>
+</div>
+<div class="break-inside-avoid group cursor-pointer reveal-card stagger-3">
+<div class="relative w-full border border-black overflow-hidden">
+<img alt="Look 06" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdnUywGjGsg-O66lCbAkqCXmckmoa5gI946IoJe2voCjsh9JskdR3JJZPDf3vq8EKdMZPFZXFmsKA2jSeRPec7GTvqXYqJzTnJ_OK5kK71nFuaGcgDVlBW52oC4uepu_27Aiwk0Z12C9IaeHCyX7_7ajjIU8rAsEdKf2xf0tyO8U64E385S4ZmzHnPzp5a_tvfhNan6gF2UzuVbA2MJB0vYMdjxpyaanCv6PRNfz-Hs0LJ5Bv0ErAAn4t_H12dm1zMeC2-bZsjjFw"/>
+</div>
+<div class="mt-4 flex justify-between items-start">
+<span class="text-klein-blue text-sm font-bold font-mono tracking-widest">LOOK 06</span>
+<div class="text-right">
+<h3 class="text-lg font-bold uppercase leading-none">Chelsea Boot</h3>
+<span class="text-xs font-mono text-gray-500">$560</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="w-full border-t border-black py-38 bg-white overflow-hidden">
+<div class="max-w-[1920px] mx-auto px-6 mb-16">
+<div class="overflow-hidden">
+<h2 class="text-4xl font-bold tracking-tight uppercase reveal-text">Mood &amp; Texture</h2>
+</div>
+</div>
+<div class="w-full overflow-x-auto scrollbar-hide">
+<div class="flex gap-12 px-6 w-fit pb-12">
+<div class="w-[400px] flex-shrink-0 group">
+<div class="aspect-square border border-black overflow-hidden mb-4">
+<img class="w-full h-full object-cover scale-150 group-hover:scale-[1.6] transition-transform duration-700 grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo5LMDa2pGV3QFyOto6ex_9Sz1-WNVmRtBxSGVkb9O33tUZ-yyTqBVBzEvXRy_Nvxqi493Q-Dtjoq5TkrARySl4JM3mdmUSY4sScIOsZ8m74nh_h4yIsdjc9R1ELsn7hlzYXgzhNPHYXoJz5ttUtqQHMABsOA3VpC-yrVuVTrz6ApOLhZFzhKxTIheIgN48zMiSAVZ40W6uJlPzsOc0uIAwxrXRrRcpqX_SH2pOkhTBHVBtf1zZ9f3-Cfv-jIy1qvMEjF6pLN2gmw"/>
+</div>
+<span class="text-xs font-mono uppercase tracking-widest text-klein-blue">Material: Organic Poplin</span>
+</div>
+<div class="w-[300px] flex-shrink-0 relative pt-12">
+<div class="bg-white p-4 pb-16 border border-black shadow-xl rotate-2 hover:rotate-0 transition-transform duration-300">
+<div class="aspect-[4/5] bg-gray-100 mb-4 overflow-hidden grayscale">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo"/>
+</div>
+<p class="font-handwriting text-center text-xs font-mono uppercase text-gray-500">Scouting — 14:00</p>
+</div>
+</div>
+<div class="w-[400px] flex-shrink-0 group">
+<div class="aspect-square border border-black overflow-hidden mb-4">
+<img class="w-full h-full object-cover scale-150 group-hover:scale-[1.6] transition-transform duration-700 grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798"/>
+</div>
+<span class="text-xs font-mono uppercase tracking-widest text-klein-blue">Detail: Peak Lapel</span>
+</div>
+<div class="w-[300px] flex-shrink-0 relative pt-8">
+<div class="bg-white p-4 pb-16 border border-black shadow-xl -rotate-2 hover:rotate-0 transition-transform duration-300">
+<div class="aspect-[4/5] bg-gray-100 mb-4 overflow-hidden grayscale">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo5LMDa2pGV3QFyOto6ex_9Sz1-WNVmRtBxSGVkb9O33tUZ-yyTqBVBzEvXRy_Nvxqi493Q-Dtjoq5TkrARySl4JM3mdmUSY4sScIOsZ8m74nh_h4yIsdjc9R1ELsn7hlzYXgzhNPHYXoJz5ttUtqQHMABsOA3VpC-yrVuVTrz6ApOLhZFzhKxTIheIgN48zMiSAVZ40W6uJlPzsOc0uIAwxrXRrRcpqX_SH2pOkhTBHVBtf1zZ9f3-Cfv-jIy1qvMEjF6pLN2gmw"/>
+</div>
+<p class="font-handwriting text-center text-xs font-mono uppercase text-gray-500">Ref: Brutalism</p>
+</div>
+</div>
+<div class="w-[400px] flex-shrink-0 group">
+<div class="aspect-square border border-black overflow-hidden mb-4">
+<img class="w-full h-full object-cover scale-125 group-hover:scale-[1.3] transition-transform duration-700 grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798"/>
+</div>
+<span class="text-xs font-mono uppercase tracking-widest text-klein-blue">Fiber: Cashmere Blend</span>
+</div>
+</div>
+</div>
+</section>
+<section class="relative w-full h-[80vh] flex items-center justify-center border-y border-black overflow-hidden bg-black animate-scale-section">
+<div class="absolute inset-0 bg-gray-900">
+<div class="w-full h-full bg-cover bg-center opacity-60" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbNv48_DmO0L8RmBkoKyamtrXsaXU2gA_9MgQT9x6r6Z30DnIdqXiE0M8ZdJNzEoiBfg7PWD8WFTEanNFQ0yho7mC0kTtd1G7q-BYDSHOy_yHNbvyQcbPX8moSj4oB2xAxoafvCzgDHBU-Regq81cTRSn3KbJQgtyjx0iWnM1rYYuSoBBjTVmgDUH8mBwl0yCT13vW0SD4vOnh98BfCAreSNLORCIdyOz_VX-AEUxqRpl4cBZqM4e0YPKx4rZrMZ7C2uuReXK91qU');"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-8">
+<div class="overflow-hidden">
+<h2 class="text-white text-6xl md:text-9xl font-black tracking-tighter uppercase text-outline-white reveal-text">In Motion</h2>
+</div>
+<button class="bg-klein-blue text-white px-10 py-4 text-sm font-bold uppercase tracking-[0.2em] border border-klein-blue hover:bg-transparent hover:text-white transition-all duration-300">
+                Shop The Scene
+            </button>
+</div>
+<div class="absolute bottom-10 left-10 flex items-center gap-4 text-white z-10">
+<span class="material-symbols-outlined text-3xl cursor-pointer hover:text-klein-blue">play_circle</span>
+<div class="w-32 h-px bg-white/50">
+<div class="w-1/3 h-full bg-klein-blue"></div>
+</div>
+<span class="text-xs font-mono">00:14 / 01:30</span>
+</div>
+</section>
+<section class="w-full max-w-[1920px] mx-auto px-6 py-38 bg-white">
+<div class="flex justify-between items-end mb-16">
+<div class="overflow-hidden">
+<h2 class="text-3xl font-bold tracking-tight uppercase reveal-text">Index</h2>
+</div>
+<a class="text-xs font-bold uppercase tracking-[0.2em] hover:text-klein-blue" href="#">Download Line Sheet</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<a class="group block reveal-card stagger-1" href="#">
+<div class="aspect-[3/4] border border-gray-200 group-hover:border-klein-blue transition-colors overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo"/>
+</div>
+<div class="mt-2 flex justify-between text-[10px] uppercase font-mono tracking-wider">
+<span>01</span>
+<span class="group-hover:text-klein-blue">Coat</span>
+</div>
+</a>
+<a class="group block reveal-card stagger-2" href="#">
+<div class="aspect-[3/4] border border-gray-200 group-hover:border-klein-blue transition-colors overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM"/>
+</div>
+<div class="mt-2 flex justify-between text-[10px] uppercase font-mono tracking-wider">
+<span>02</span>
+<span class="group-hover:text-klein-blue">Pant</span>
+</div>
+</a>
+<a class="group block reveal-card stagger-3" href="#">
+<div class="aspect-[3/4] border border-gray-200 group-hover:border-klein-blue transition-colors overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798"/>
+</div>
+<div class="mt-2 flex justify-between text-[10px] uppercase font-mono tracking-wider">
+<span>03</span>
+<span class="group-hover:text-klein-blue">Blazer</span>
+</div>
+</a>
+<a class="group block reveal-card stagger-4" href="#">
+<div class="aspect-[3/4] border border-gray-200 group-hover:border-klein-blue transition-colors overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo5LMDa2pGV3QFyOto6ex_9Sz1-WNVmRtBxSGVkb9O33tUZ-yyTqBVBzEvXRy_Nvxqi493Q-Dtjoq5TkrARySl4JM3mdmUSY4sScIOsZ8m74nh_h4yIsdjc9R1ELsn7hlzYXgzhNPHYXoJz5ttUtqQHMABsOA3VpC-yrVuVTrz6ApOLhZFzhKxTIheIgN48zMiSAVZ40W6uJlPzsOc0uIAwxrXRrRcpqX_SH2pOkhTBHVBtf1zZ9f3-Cfv-jIy1qvMEjF6pLN2gmw"/>
+</div>
+<div class="mt-2 flex justify-between text-[10px] uppercase font-mono tracking-wider">
+<span>04</span>
+<span class="group-hover:text-klein-blue">Shirt</span>
+</div>
+</a>
+<a class="group block reveal-card stagger-5" href="#">
+<div class="aspect-[3/4] border border-gray-200 group-hover:border-klein-blue transition-colors overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqLwchKssKhsQ-6GjF98YT7cVOKSHqYgOcPT4A8ygS8HWD552MWX8PbkENViCTnWP-QAazr2Xg-aJ_dySLkghG4tSH_wCcF5HpuprnRJgthUgkBJOq8AFew6B4M4K_T99uLSWG8bukAbaySwG1c9fVujMZzcj9DhXskBlSnbW3UDN8vZiEL5HoqfI6SWUhsFuMGn9G7s3BcAh7fn5nlT-YeB7kMu8dOTPoaulsRcDa9HoV1Z5VJwW-J5fFkRcTJmFeKc3C5aDfPLM"/>
+</div>
+<div class="mt-2 flex justify-between text-[10px] uppercase font-mono tracking-wider">
+<span>05</span>
+<span class="group-hover:text-klein-blue">Scarf</span>
+</div>
+</a>
+<a class="group block reveal-card stagger-6" href="#">
+<div class="aspect-[3/4] border border-gray-200 group-hover:border-klein-blue transition-colors overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdnUywGjGsg-O66lCbAkqCXmckmoa5gI946IoJe2voCjsh9JskdR3JJZPDf3vq8EKdMZPFZXFmsKA2jSeRPec7GTvqXYqJzTnJ_OK5kK71nFuaGcgDVlBW52oC4uepu_27Aiwk0Z12C9IaeHCyX7_7ajjIU8rAsEdKf2xf0tyO8U64E385S4ZmzHnPzp5a_tvfhNan6gF2UzuVbA2MJB0vYMdjxpyaanCv6PRNfz-Hs0LJ5Bv0ErAAn4t_H12dm1zMeC2-bZsjjFw"/>
+</div>
+<div class="mt-2 flex justify-between text-[10px] uppercase font-mono tracking-wider">
+<span>06</span>
+<span class="group-hover:text-klein-blue">Boot</span>
+</div>
+</a>
+</div>
+</section>
+<footer class="w-full bg-white text-black border-t border-black">
+<div class="max-w-[1920px] mx-auto flex flex-col md:flex-row">
+<div class="w-full md:w-1/2 p-12 md:p-24 border-b md:border-b-0 md:border-r border-black flex flex-col justify-between min-h-[500px]">
+<div>
+<h3 class="text-8xl font-black uppercase tracking-tighter mb-8 text-outline">Luxe<br/>Inc.</h3>
+</div>
+<form class="flex flex-col gap-4 max-w-md">
+<label class="text-xs font-bold uppercase tracking-[0.2em]" for="email">Newsletter</label>
+<div class="flex border-b border-black">
+<input class="w-full h-12 bg-transparent border-none p-0 text-black placeholder:text-gray-400 focus:ring-0 font-mono text-sm uppercase" id="email" placeholder="Email Address" type="email"/>
+<button class="text-sm font-bold uppercase tracking-widest hover:text-klein-blue transition-colors" type="button">
+                            Submit
+                        </button>
+</div>
 </form>
 </div>
-<div class="w-full md:w-1/2 p-6 md:p-16 flex flex-col justify-between min-h-[400px]">
-<div class="grid grid-cols-2 gap-8">
+<div class="w-full md:w-1/2 p-12 md:p-24 flex flex-col justify-between min-h-[500px]">
+<div class="grid grid-cols-2 gap-12">
 <div class="flex flex-col gap-4">
-<span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Social</span>
-<a class="text-xl md:text-2xl font-bold uppercase hover:text-klein-blue transition-colors" href="#">Instagram</a>
-<a class="text-xl md:text-2xl font-bold uppercase hover:text-klein-blue transition-colors" href="#">Twitter</a>
+<span class="text-xs font-bold text-klein-blue uppercase tracking-widest mb-2">Social</span>
+<a class="text-lg font-bold uppercase hover:text-klein-blue transition-colors" href="#">Instagram</a>
+<a class="text-lg font-bold uppercase hover:text-klein-blue transition-colors" href="#">Twitter</a>
+<a class="text-lg font-bold uppercase hover:text-klein-blue transition-colors" href="#">Pinterest</a>
 </div>
 <div class="flex flex-col gap-4">
-<span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Help</span>
-<a class="text-xl md:text-2xl font-bold uppercase hover:text-klein-blue transition-colors" href="#">Shipping</a>
-<a class="text-xl md:text-2xl font-bold uppercase hover:text-klein-blue transition-colors" href="#">Returns</a>
+<span class="text-xs font-bold text-klein-blue uppercase tracking-widest mb-2">Legal</span>
+<a class="text-lg font-bold uppercase hover:text-klein-blue transition-colors" href="#">Returns</a>
+<a class="text-lg font-bold uppercase hover:text-klein-blue transition-colors" href="#">Shipping</a>
+<a class="text-lg font-bold uppercase hover:text-klein-blue transition-colors" href="#">Terms</a>
 </div>
 </div>
-<div class="mt-12 pt-8 border-t border-gray-100 dark:border-gray-800 flex justify-between items-end text-[10px] text-gray-400 font-mono uppercase">
-<span>© 2024 Luxe Inc.</span>
-<div class="flex gap-4">
-<a class="hover:text-klein-blue" href="#">Privacy</a>
-<a class="hover:text-klein-blue" href="#">Terms</a>
-</div>
+<div class="mt-12 pt-8 flex justify-between items-end text-xs text-gray-500 font-mono uppercase">
+<span>© 2024 Luxe Inc. All Rights Reserved.</span>
+<span class="text-black">Design by Editorial</span>
 </div>
 </div>
 </div>
 </footer>
-
+</div>
 </body></html>

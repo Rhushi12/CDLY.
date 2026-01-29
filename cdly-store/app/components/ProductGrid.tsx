@@ -1,4 +1,7 @@
+"use client";
+
 import ProductCard from "./ProductCard";
+import SplitText from "./SplitText";
 
 const products = [
     {
@@ -64,9 +67,15 @@ export default function ProductGrid() {
     return (
         <section className="w-full max-w-[1440px] mx-auto px-6 py-20 reveal-on-scroll bg-white">
             <div className="flex justify-between items-end mb-12">
-                <h2 className="text-4xl font-bold tracking-tight uppercase text-[#111318]">
-                    Latest Drops
-                </h2>
+                <SplitText
+                    text="Latest Drops"
+                    tag="h2"
+                    className="text-4xl font-bold tracking-tight uppercase text-[#111318]"
+                    splitType="chars"
+                    delay={30}
+                    duration={0.8}
+                    textAlign="left"
+                />
                 <a
                     className="hidden md:inline-flex items-center text-sm font-bold uppercase tracking-widest border-b border-black pb-1 text-[#111318] hover:text-[--primary] hover:border-[--primary] transition-colors"
                     href="#"

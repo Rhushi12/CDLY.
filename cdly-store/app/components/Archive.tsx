@@ -1,3 +1,7 @@
+"use client";
+
+import SplitText from "./SplitText";
+
 const archiveItems = [
     {
         title: "Spring 98",
@@ -36,9 +40,15 @@ export default function Archive() {
         <section className="w-full border-t border-gray-200 overflow-hidden bg-white reveal-on-scroll">
             <div className="max-w-[1440px] mx-auto">
                 <div className="px-6 py-10 md:py-16 border-b border-gray-200">
-                    <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-[#111318] leading-none">
-                        The Archive
-                    </h2>
+                    <SplitText
+                        text="The Archive"
+                        tag="h2"
+                        className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-[#111318] leading-none"
+                        splitType="chars"
+                        delay={30}
+                        duration={0.8}
+                        textAlign="left"
+                    />
                 </div>
                 <div className="w-full overflow-x-auto pb-6 scrollbar-hide">
                     <div className="flex gap-8 px-6 py-12 w-fit">
