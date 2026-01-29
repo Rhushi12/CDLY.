@@ -1,3 +1,11 @@
+"use client";
+
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const collections = [
     {
         title: "Brutalist\nWinter",
@@ -10,6 +18,7 @@ const collections = [
         season: "SS/22",
         image:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuBNkr4p_NgJfxwPRvJ0jN_N8zKhVp4ycPhME7gFmndMmINaagEo8ThDEVyzv73XW1bK1hjDLmPM66QGVkI7wI1pP98Ydqr95xANyTzcrl4Eu62S7G4_97RFNyE0zlZyV3PnNAHf_0mY4vX1p24hqZnCo6yD3q4Aylmtayn1ZKX6SLkFAVMc5lYYOcuqbnN6wBrfas5gv31Vc6sJvALDlArYL5rMwiib1jqdGspT2KsB3IODBQUrpHA9NlPOICV-wNah13Ug1bke798",
+        isMiddle: true,
     },
     {
         title: "Silent\nForms",
@@ -28,6 +37,7 @@ const collections = [
         season: "FW/20",
         image:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo",
+        isMiddle: true,
     },
     {
         title: "Void\nStructure",
@@ -46,6 +56,7 @@ const collections = [
         season: "SS/19",
         image:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuBdnUywGjGsg-O66lCbAkqCXmckmoa5gI946IoJe2voCjsh9JskdR3JJZPDf3vq8EKdMZPFZXFmsKA2jSeRPec7GTvqXYqJzTnJ_OK5kK71nFuaGcgDVlBW52oC4uepu_27Aiwk0Z12C9IaeHCyX7_7ajjIU8rAsEdKf2xf0tyO8U64E385S4ZmzHnPzp5a_tvfhNan6gF2UzuVbA2MJB0vYMdjxpyaanCv6PRNfz-Hs0LJ5Bv0ErAAn4t_H12dm1zMeC2-bZsjjFw",
+        isMiddle: true,
     },
     {
         title: "Modern\nEcho",
@@ -56,13 +67,50 @@ const collections = [
 ];
 
 export default function CollectionGrid() {
+    const middleCardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+    useEffect(() => {
+        const middleCards = middleCardsRef.current.filter(Boolean);
+        const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
+        if (!isDesktop || middleCards.length === 0) return;
+
+        middleCards.forEach((card) => {
+            if (!card) return;
+
+            gsap.fromTo(
+                card,
+                { y: 80 },
+                {
+                    y: -80,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,
+                    },
+                }
+            );
+        });
+
+        return () => {
+            ScrollTrigger.getAll().forEach((st) => st.kill());
+        };
+    }, []);
+
     return (
         <section className="py-40 md:py-48 bg-white">
             <div className="max-w-[1440px] mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
-                    {collections.map((collection) => (
+                    {collections.map((collection, index) => (
                         <div
                             key={collection.season}
+                            ref={(el) => {
+                                if (collection.isMiddle) {
+                                    middleCardsRef.current[index] = el;
+                                }
+                            }}
                             className="group relative block aspect-[3/4] overflow-hidden bg-gray-50 cursor-pointer"
                         >
                             {/* Image */}

@@ -1,4 +1,11 @@
+"use client";
+
+import { useRef, useEffect } from "react";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const products = [
     {
@@ -18,6 +25,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM",
         isNew: false,
         slug: "relaxed-pleated-trouser",
+        isMiddle: true,
     },
     {
         name: "Heavyweight Cashmere Knit",
@@ -45,6 +53,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo",
         isNew: false,
         slug: "technical-parka",
+        isMiddle: true,
     },
     {
         name: "Polished Leather Derby",
@@ -72,6 +81,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM",
         isNew: false,
         slug: "silk-blend-shirt",
+        isMiddle: true,
     },
     {
         name: "Double Breasted Blazer",
@@ -85,46 +95,86 @@ const products = [
 ];
 
 export default function NewArrivalsGrid() {
+    const middleCardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+    useEffect(() => {
+        const middleCards = middleCardsRef.current.filter(Boolean);
+        const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
+        if (!isDesktop || middleCards.length === 0) return;
+
+        middleCards.forEach((card) => {
+            if (!card) return;
+
+            gsap.fromTo(
+                card,
+                { y: 80 },
+                {
+                    y: -80,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,
+                    },
+                }
+            );
+        });
+
+        return () => {
+            ScrollTrigger.getAll().forEach((st) => st.kill());
+        };
+    }, []);
+
     return (
         <main className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
-                {products.map((product) => (
-                    <Link
+                {products.map((product, index) => (
+                    <div
                         key={product.slug}
-                        href={`/products/${product.slug}`}
-                        className="group cursor-pointer block"
+                        ref={(el) => {
+                            if (product.isMiddle) {
+                                middleCardsRef.current[index] = el;
+                            }
+                        }}
                     >
-                        {/* Image */}
-                        <div className="relative w-full aspect-[3/4] border border-black overflow-hidden mb-6 bg-gray-100">
-                            <div
-                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                                style={{ backgroundImage: `url('${product.imageUrl}')` }}
-                            />
-                            <div className="absolute inset-0 bg-[#004aad] mix-blend-multiply opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
-                            {product.isNew && (
-                                <div className="absolute top-4 right-4">
-                                    <span className="bg-[#004aad] text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">
-                                        New
+                        <Link
+                            href={`/products/${product.slug}`}
+                            className="group cursor-pointer block"
+                        >
+                            {/* Image */}
+                            <div className="relative w-full aspect-[3/4] border border-black overflow-hidden mb-6 bg-gray-100">
+                                <div
+                                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                    style={{ backgroundImage: `url('${product.imageUrl}')` }}
+                                />
+                                <div className="absolute inset-0 bg-[#004aad] mix-blend-multiply opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                                {product.isNew && (
+                                    <div className="absolute top-4 right-4">
+                                        <span className="bg-[#004aad] text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1">
+                                            New
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Info */}
+                            <div className="flex flex-col gap-2">
+                                <h3 className="text-sm font-bold uppercase tracking-wider group-hover:text-[#004aad] transition-colors text-[#111318]">
+                                    {product.name}
+                                </h3>
+                                <div className="flex justify-between items-baseline border-t border-black/10 pt-2">
+                                    <span className="text-[10px] font-[family-name:var(--font-mono)] text-gray-500 uppercase tracking-widest">
+                                        {product.category}
+                                    </span>
+                                    <span className="text-sm font-[family-name:var(--font-mono)] font-medium text-[#111318]">
+                                        {product.price}
                                     </span>
                                 </div>
-                            )}
-                        </div>
-
-                        {/* Info */}
-                        <div className="flex flex-col gap-2">
-                            <h3 className="text-sm font-bold uppercase tracking-wider group-hover:text-[#004aad] transition-colors text-[#111318]">
-                                {product.name}
-                            </h3>
-                            <div className="flex justify-between items-baseline border-t border-black/10 pt-2">
-                                <span className="text-[10px] font-[family-name:var(--font-mono)] text-gray-500 uppercase tracking-widest">
-                                    {product.category}
-                                </span>
-                                <span className="text-sm font-[family-name:var(--font-mono)] font-medium text-[#111318]">
-                                    {product.price}
-                                </span>
                             </div>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
                 ))}
             </div>
 

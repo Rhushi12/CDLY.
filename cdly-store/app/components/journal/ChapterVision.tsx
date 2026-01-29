@@ -1,9 +1,41 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedQuote from "../AnimatedQuote";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function ChapterVision() {
+    const middleCardRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!middleCardRef.current) return;
+        const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+        if (!isDesktop) return;
+
+        gsap.fromTo(
+            middleCardRef.current,
+            { y: 80 },
+            {
+                y: -80,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: middleCardRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1,
+                },
+            }
+        );
+
+        return () => {
+            ScrollTrigger.getAll().forEach((st) => st.kill());
+        };
+    }, []);
+
     return (
         <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 lg:py-40">
             {/* Chapter Marker */}
@@ -45,7 +77,10 @@ export default function ChapterVision() {
                     </div>
                 </div>
 
-                <div className="h-[400px] lg:h-full bg-gray-100 overflow-hidden relative group cursor-pointer md:mt-12 lg:mt-24">
+                <div
+                    ref={middleCardRef}
+                    className="h-[400px] lg:h-full bg-gray-100 overflow-hidden relative group cursor-pointer"
+                >
                     <img
                         alt="Model walking in minimalist setting wearing black"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
