@@ -1,3 +1,7 @@
+"use client";
+
+import AnimatedQuote from "./AnimatedQuote";
+
 export default function Quote() {
     return (
         <section className="w-full border-t border-gray-200 bg-white reveal-on-scroll">
@@ -6,9 +10,10 @@ export default function Quote() {
                     <span className="material-symbols-outlined text-4xl mb-8 text-[#111318]">
                         format_quote
                     </span>
-                    <blockquote className="text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight tracking-tight text-[#111318]">
-                        &quot;Eliminate the unnecessary so that the necessary may speak.&quot;
-                    </blockquote>
+                    <AnimatedQuote
+                        text='"Eliminate the unnecessary so that the necessary may speak."'
+                        className="text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight tracking-tight text-[#111318]"
+                    />
                     <div className="mt-8 flex items-center gap-4">
                         <div className="h-px w-12 bg-black" />
                         <cite className="text-xs font-bold tracking-[0.2em] uppercase text-gray-500 not-italic">

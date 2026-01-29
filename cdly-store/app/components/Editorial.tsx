@@ -1,3 +1,7 @@
+"use client";
+
+import AnimatedQuote from "./AnimatedQuote";
+
 export default function Editorial() {
     return (
         <section className="w-full bg-[#144bb8] text-white py-24 px-6 reveal-on-scroll">
@@ -6,9 +10,10 @@ export default function Editorial() {
                     <span className="block text-white/60 text-xs font-bold tracking-[0.2em] mb-4 uppercase">
                         Editorial • Volume 04
                     </span>
-                    <blockquote className="text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-8">
-                        &quot;Fashion is the armor to survive the reality of everyday life.&quot;
-                    </blockquote>
+                    <AnimatedQuote
+                        text='"Fashion is the armor to survive the reality of everyday life."'
+                        className="text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-8 text-white"
+                    />
                     <p className="text-white/80 font-[family-name:var(--font-mono)] text-sm uppercase">
                         — Bill Cunningham
                     </p>

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import AnimatedQuote from "../AnimatedQuote";
 
 export default function ChapterVision() {
     return (
@@ -18,13 +21,10 @@ export default function ChapterVision() {
                 <span className="material-symbols-outlined text-6xl text-[#004aad] mb-8 opacity-50">
                     format_quote
                 </span>
-                <blockquote className="text-3xl lg:text-5xl font-serif italic leading-tight text-[#111318] mb-8">
-                    &quot;Modernity is not about the new. It is about the{" "}
-                    <span className="bg-[#111318] text-white px-2 not-italic font-bold">
-                        eternal
-                    </span>{" "}
-                    refined to its sharpest point.&quot;
-                </blockquote>
+                <AnimatedQuote
+                    text='"Modernity is not about the new. It is about the eternal refined to its sharpest point."'
+                    className="text-3xl lg:text-5xl font-serif italic leading-tight text-[#111318] mb-8"
+                />
                 <cite className="font-[family-name:var(--font-mono)] text-sm tracking-widest uppercase not-italic text-gray-600">
                     — ELENA ROSSI, CREATIVE DIRECTOR
                 </cite>
