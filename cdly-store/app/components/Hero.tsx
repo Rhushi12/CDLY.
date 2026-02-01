@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
     return (
-        <section className="relative w-full h-[calc(100vh-4rem)] min-h-[600px] flex items-center border-b border-gray-200 overflow-hidden">
+        <section className="sticky top-16 z-0 w-full h-[calc(100vh-4rem)] min-h-[600px] flex items-center border-b border-gray-200 overflow-hidden">
             <div className="absolute inset-0 z-0">
                 <div
                     className="w-full h-full bg-cover bg-center"
