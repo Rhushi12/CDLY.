@@ -1,8 +1,11 @@
+import Link from "next/link";
+
 interface DetailProductCardProps {
     name: string;
     category: string;
     price: string;
     imageUrl: string;
+    slug: string;
     isArchive?: boolean;
     offset?: boolean;
 }
@@ -12,11 +15,13 @@ export default function DetailProductCard({
     category,
     price,
     imageUrl,
+    slug,
     isArchive = false,
     offset = false,
 }: DetailProductCardProps) {
     return (
-        <div
+        <Link
+            href={`/products/${slug}`}
             className={`group flex flex-col gap-3 cursor-pointer reveal-on-scroll ${offset ? "lg:mt-16" : ""
                 }`}
         >
@@ -46,6 +51,6 @@ export default function DetailProductCard({
                     {price}
                 </span>
             </div>
-        </div>
+        </Link>
     );
 }

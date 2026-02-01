@@ -12,6 +12,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuB3wWZCyBJpL3dRrsh9jWvhFZGBS_Oq9Sn7lH2ukILu5hk7qQJMmmtINMPLVC3uo5nsZtuSgpMJrRzu7VySKlzhtvw4jzCvsgEOrVHX4kjLQCvzHDditlrnIguwnJXM23i-KyVaMNu7QB073bWPxyXa7nKSlFq9xhsEVejTPt606dkWDRJX_AYoXMtkeeAjE_hBGvkUW2iFjUOFqK7dhDZ9QRUig5dG0XWtzBGJHmyj05w-g9Qm_AcU5PGvENpn5rK6hZIoWxeLVFo",
         imageAlt: "Woman wearing long beige wool trench coat standing in minimal setting",
         isNew: true,
+        slug: "wool-trench-coat",
     },
     {
         name: "Structured Blazer",
@@ -22,6 +23,7 @@ const products = [
         imageAlt: "Close up of structured black blazer texture and lapel details",
         isNew: false,
         className: "md:mt-12",
+        slug: "structured-blazer",
     },
     {
         name: "Pleated Trousers",
@@ -31,6 +33,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuB22YQSyDdp7avTMvT3g3NUxMJk_loM2mwNgs_RPnP5IDzIskT_z32W29JUdDRsop8PWcBm1IIM6uB5nC3Y0qSQChTr0pJFHRgCxy-y1gUnwaKKgsP_6uZSXmX4D3Oopu8eRm_DBWpJ5VU6WK6rr0ztLv5hJwQR6F-5K3D_X4nkOd2RHH1vUlvrh0y57IZ_moF33dsRd5J9C6X0EO5jcsC7PwO7Sup1h_wMiblHqLziwA0IeAnX800ECSDwLVBDBLW4cwFEo4eRFlM",
         imageAlt: "Minimal pleated trousers in charcoal grey on model walking",
         isNew: false,
+        slug: "pleated-trousers",
     },
     {
         name: "Leather Chelsea Boot",
@@ -41,6 +44,7 @@ const products = [
         imageAlt: "Black leather chelsea boots on concrete floor",
         isNew: false,
         className: "md:mt-[-3rem] lg:mt-0",
+        slug: "leather-chelsea-boot",
     },
     {
         name: "Silk Print Scarf",
@@ -51,6 +55,7 @@ const products = [
         imageAlt: "Silk scarf with abstract black and white print draped on mannequin",
         isNew: false,
         className: "md:mt-12",
+        slug: "silk-print-scarf",
     },
     {
         name: "Oversized Shirt",
@@ -60,6 +65,7 @@ const products = [
             "https://lh3.googleusercontent.com/aida-public/AB6AXuAo5LMDa2pGV3QFyOto6ex_9Sz1-WNVmRtBxSGVkb9O33tUZ-yyTqBVBzEvXRy_Nvxqi493Q-Dtjoq5TkrARySl4JM3mdmUSY4sScIOsZ8m74nh_h4yIsdjc9R1ELsn7hlzYXgzhNPHYXoJz5ttUtqQHMABsOA3VpC-yrVuVTrz6ApOLhZFzhKxTIheIgN48zMiSAVZ40W6uJlPzsOc0uIAwxrXRrRcpqX_SH2pOkhTBHVBtf1zZ9f3-Cfv-jIy1qvMEjF6pLN2gmw",
         imageAlt: "Oversized white cotton shirt on hanger against white wall",
         isNew: false,
+        slug: "oversized-shirt",
     },
 ];
 
@@ -94,6 +100,7 @@ export default function ProductGrid() {
                         imageAlt={product.imageAlt}
                         isNew={product.isNew}
                         className={product.className}
+                        slug={product.slug}
                     />
                 ))}
             </div>
